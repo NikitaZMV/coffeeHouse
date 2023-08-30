@@ -1,15 +1,21 @@
 package coffeehouse.entity;
 
-import coffeehouse.model.EventTypes;
-import lombok.Data;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-@Data
-@Table()
+@Setter
+@Getter
+@NoArgsConstructor
+@DiscriminatorValue("ACCEPTED")
 public class OrderAcceptedEvent extends OrderEvent {
-    public OrderAcceptedEvent() {
-        this.eventType = EventTypes.ACCEPTED;
+
+    public OrderAcceptedEvent(int orderId, int employeeId, Date eventDateTime) {
+        super(orderId, employeeId, eventDateTime);
     }
 }

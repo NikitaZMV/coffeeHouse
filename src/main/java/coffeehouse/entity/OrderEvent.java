@@ -1,28 +1,35 @@
 package coffeehouse.entity;
 
-import coffeehouse.model.EventTypes;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
 
-import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "events")
-public class OrderEvent {
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING,
+        name = "event_type")
+public abstract class OrderEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     @Column(name = "order_id", nullable = false)
-    int orderId;   //Идентификатор заказа
+    int orderId;
 
     @Column(name = "employee_id", nullable = false)
-    int employeeId;  //Идентификтор сотрудника
+    int employeeId;
 
     @Column(name = "datetime", nullable = false)
-    Date eventDateTime;  //Дата и время
+    Date eventDateTime;
 
-    @Column(name = "event_type", nullable = false)
-    EventTypes eventType;
+    public OrderEvent(int orderId, int employeeId, Date eventDateTime) {
+        this.orderId = orderId;
+        this.employeeId = employeeId;
+        this.eventDateTime = eventDateTime;
+    }
 }

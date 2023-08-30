@@ -1,15 +1,21 @@
 
 package coffeehouse.entity;
 
-import coffeehouse.model.EventTypes;
-import javax.persistence.*;
-import lombok.Data;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.Date;
 
 @Entity
-@Data
-@Table(name = "events")
+@Getter
+@Setter
+@DiscriminatorValue("READY")
+@NoArgsConstructor
 public class OrderReadyEvent extends OrderEvent {
-    public OrderReadyEvent() {
-        this.eventType = EventTypes.READY;
+    public OrderReadyEvent(int orderId, int employeeId, Date eventDateTime) {
+        super(orderId, employeeId, eventDateTime);
     }
 }
