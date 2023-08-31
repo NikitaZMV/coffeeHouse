@@ -1,6 +1,6 @@
 package coffeehouse.service;
 
-import coffeehouse.Dto.CoffeeHouseDto;
+import coffeehouse.dto.CoffeeHouseDto;
 import coffeehouse.exception.CoffeeHouseException;
 import coffeehouse.model.Order;
 import coffeehouse.entity.OrderEvent;

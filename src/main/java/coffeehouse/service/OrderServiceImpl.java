@@ -1,10 +1,9 @@
 package coffeehouse.service;
 
-import coffeehouse.Dto.CoffeeHouseDto;
+import coffeehouse.dto.CoffeeHouseDto;
 import coffeehouse.entity.*;
 import coffeehouse.exception.CoffeeHouseException;
-import coffeehouse.model.Order;
-import coffeehouse.model.OrderStatus;
+import coffeehouse.model.*;
 import coffeehouse.repo.*;
 import coffeehouse.validation.OrderEventValidationService;
 import org.springframework.stereotype.Service;
@@ -25,16 +24,16 @@ public class OrderServiceImpl implements OrderService {
         this.put(OrderCancelledEvent.class, OrderStatus.CANCELED);
     }};
     private final OrderRegisteredEventRepo registeredEventRepo;
-    private final OrderCanceledEventRepo orderCanceledEventRepo;
+    private final OrderCancelledEventRepo orderCancelledEventRepo;
     private final OrderAcceptedEventRepo orderAcceptedEventRepo;
     private final OrderReadyEventRepo orderReadyEventRepo;
     private final OrderIssuedEventRepo orderIssuedEventRepo;
     private final OrderEventRepo<OrderEvent> origRepo;
     private final OrderEventValidationService validator;
 
-    public OrderServiceImpl(OrderRegisteredEventRepo registeredEventRepo, OrderCanceledEventRepo orderCanceledEventRepo, OrderAcceptedEventRepo orderAcceptedEventRepo, OrderReadyEventRepo orderReadyEventRepo, OrderIssuedEventRepo orderIssuedEventRepo, OrderEventRepo<OrderEvent> origRepo, OrderEventValidationService validator) {
+    public OrderServiceImpl(OrderRegisteredEventRepo registeredEventRepo, OrderCancelledEventRepo orderCancelledEventRepo, OrderAcceptedEventRepo orderAcceptedEventRepo, OrderReadyEventRepo orderReadyEventRepo, OrderIssuedEventRepo orderIssuedEventRepo, OrderEventRepo<OrderEvent> origRepo, OrderEventValidationService validator) {
         this.registeredEventRepo = registeredEventRepo;
-        this.orderCanceledEventRepo = orderCanceledEventRepo;
+        this.orderCancelledEventRepo = orderCancelledEventRepo;
         this.orderAcceptedEventRepo = orderAcceptedEventRepo;
         this.orderReadyEventRepo = orderReadyEventRepo;
         this.orderIssuedEventRepo = orderIssuedEventRepo;
@@ -51,11 +50,11 @@ public class OrderServiceImpl implements OrderService {
             case OrderAcceptedEvent acceptedEvent -> orderAcceptedEventRepo.save(acceptedEvent);
             case OrderReadyEvent readyEvent -> orderReadyEventRepo.save(readyEvent);
             case OrderIssuedEvent issuedEvent -> orderIssuedEventRepo.save(issuedEvent);
-            case OrderCancelledEvent canceledEvent -> orderCanceledEventRepo.save(canceledEvent);
+            case OrderCancelledEvent canceledEvent -> orderCancelledEventRepo.save(canceledEvent);
 
             default -> throw new IllegalStateException("Unexpected value: " + event);
         }
-        return new CoffeeHouseDto(event);
+        return new CoffeeHouseDto<>(event);
     }
 
     @Override

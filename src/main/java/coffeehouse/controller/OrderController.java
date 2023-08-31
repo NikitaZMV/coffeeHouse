@@ -1,6 +1,6 @@
 package coffeehouse.controller;
 
-import coffeehouse.Dto.CoffeeHouseDto;
+import coffeehouse.dto.CoffeeHouseDto;
 import coffeehouse.entity.*;
 import coffeehouse.exception.CoffeeHouseException;
 import coffeehouse.model.Order;
