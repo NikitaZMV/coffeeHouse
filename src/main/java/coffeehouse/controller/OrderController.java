@@ -18,7 +18,7 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/Registered", method = RequestMethod.POST)
     public ResponseEntity<CoffeeHouseDto<? extends OrderEvent>> post(@RequestBody OrderRegisteredEvent event) throws CoffeeHouseException {
         return ResponseEntity.ok().body(orderService.publishEvent(event));
     }
