@@ -1,4 +1,3 @@
-
 package coffeehouse.entity;
 
 import jakarta.persistence.DiscriminatorValue;

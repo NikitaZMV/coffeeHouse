@@ -1,7 +1,7 @@
 package CoffeeHouse.controller;
 
 import coffeehouse.controller.OrderController;
-import coffeehouse.dto.CoffeeHouseDto;
+import coffeehouse.Dto.CoffeeHouseDto;
 import coffeehouse.service.OrderService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
